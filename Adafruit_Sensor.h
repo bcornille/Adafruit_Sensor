@@ -16,16 +16,10 @@
 
 /* Update by K. Townsend (Adafruit Industries) for lighter typedefs, and
  * extended sensor support to include color, voltage and current */
+#include <chrono>
  
 #ifndef _ADAFRUIT_SENSOR_H
 #define _ADAFRUIT_SENSOR_H
-
-#if ARDUINO >= 100
- #include "Arduino.h"
- #include "Print.h"
-#else
- #include "WProgram.h"
-#endif
 
 /* Intentionally modeled after sensors.h in the Android API:
  * https://github.com/android/platform_hardware_libhardware/blob/master/include/hardware/sensors.h */
@@ -103,7 +97,7 @@ typedef struct
     int32_t sensor_id;                        /**< unique sensor identifier */
     int32_t type;                             /**< sensor type */
     int32_t reserved0;                        /**< reserved */
-    int32_t timestamp;                        /**< time is in milliseconds */
+	std::chrono::time_point<std::chrono::system_clock> timestamp; /**< time is in milliseconds */
     union
     {
         float           data[4];
